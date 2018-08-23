@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+
+    <title>EMI Calculator</title>
+  </head>
+  <body>
+    <div class="container">
+        <h1 class="text-center">EMI Calculator</h1>
+        <div class="input-group mb-3 mt-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Amount</span>
+        </div>
+        <input type="number" class="form-control" id="amount">
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Paid</span>
+        </div>
+        <input type="number" class="form-control" id="paid">
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Rate</span>
+        </div>
+        <input type="number" class="form-control" id="rate">
+      </div>
+      
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Months</span>
+        </div>
+        <input type="number" class="form-control" id="months">
+      </div>
+      
+       <button type="button" class="btn btn-outline-primary btn-lg btn-block mt-3">
+          Calculate
+        </button>
+       <div class="input-group mt-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            Total EMI
+          </span>
+        </div>
+        <input type="number" class="form-control" id="total-emi" disabled>
+      </div>
+      
+      <div class="input-group mt-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            EMI per month
+          </span>
+        </div>
+        <input type="number" class="form-control" id="emi-per-month" disabled>
+      </div>
+      
+      <div class="input-group mt-3 mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text">
+            Interest
+          </span>
+        </div>
+        <input type="number" class="form-control" id="interest" disabled>
+      </div>
+    </div>
+       
+    <style>
+        .row {
+            background: #f8f9fa;
+            margin-top: 20px;
+        }
+
+        .col {
+            border: solid 1px #6c757d;
+            padding: 10px;
+        }
+    </style>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+
+    <script>
+        $('.btn').click(function() {
+            const amount = parseFloat($('#amount').val(), 10);
+            const paid = parseFloat($('#paid').val(), 10);
+            const rate = parseFloat($('#rate').val(), 10);
+            const month = parseFloat($('#months').val(), 10);
+
+                var totalEMI = (amount - paid) *
+                                                    Math.pow(( 1 + (rate/1200)), month);
+                $('#total-emi').val(totalEMI.toFixed(2));
+            
+            var EMIPerMonth = totalEMI / month;
+                $('#emi-per-month').val(EMIPerMonth.toFixed(2));
+                
+            console.log(totalEMI, amount, paid);
+            
+            var interest = totalEMI - amount + paid;
+                $('#interest').val(interest.toFixed(2));
+            })
+    </script>
+  </body>
+</html>
